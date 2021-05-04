@@ -1,0 +1,1 @@
+const { user, password, database } = require('./config');
