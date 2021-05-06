@@ -10,5 +10,14 @@ const PORT = 3000;
 
 app.use(express.json());
 
+app.use((req, res, next) => {
+  console.log(`${req.method} incoming for ${req.url}`);
+  next();
+})
+
+app.listen(PORT, () => {
+  console.log(`Server is running and listening on port ${PORT}`);
+});
+
 
 module.exports = app;
