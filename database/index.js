@@ -11,18 +11,26 @@ const client = new Client({
   max: 20,
 });
 
+
+// async function connect() {
+//     const c = await client.connect(); // try to connect
+//     return c.client.serverVersion; // return server version
+// }
+// connect()
+
+
 client.connect((err) => {
   if (err) {
     console.error('connection error: ', err.stack);
   } else {
-    console.log('connected to postgres database pool')
+    console.log(`${user} connected to postgres database: ${database}`)
   }
 });
 
 //var connectionString = `postgres://${user}:${password}@localhost:5432/${database}`;
 
+//
 // const db=pgp(connectionString)
-
 // async function testConnection() {
 //   const c = await db.connect();
 //   c.done();
