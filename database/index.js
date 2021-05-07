@@ -1,5 +1,5 @@
 const { user, password, database } = require("./config");
-const pg = require("pg");
+const { Pool } = require("pg");
 
 const config = {
 	host: "localhost",
@@ -11,7 +11,7 @@ const config = {
 	idleTimeoutMillis: 30000
 };
 
-const pool = new pg.Pool(config);
+const pool = new Pool(config);
 
 
 
@@ -22,6 +22,10 @@ pool.connect((err) => {
 	} else {
 		console.log(`${user} connected to postgres database: ${database}`);
 	}
+});
+
+pool.on("error", (err, client) => {
+	console.error("Error:", err);
 });
 // async function connect() {
 //     const c = await client.connect(); // try to connect
