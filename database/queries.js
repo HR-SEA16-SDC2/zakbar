@@ -17,6 +17,8 @@ db.query(query, (err, res) => {
 	}
 	db.end();
 });
+
+
 // const controllers = {
 
 // 	getAllQuestions: () => {

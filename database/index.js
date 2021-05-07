@@ -1,20 +1,22 @@
 const { user, password, database } = require("./config");
-const { Client } = require("pg");
-const pgp = require("pg-promise");
+const pg = require("pg");
 
-const client = new Client({
+const config = {
 	host: "localhost",
 	user: `${user}`,
 	password: `${password}`,
 	database: `${database}`,
 	port: 5432,
 	max: 20,
-});
+	idleTimeoutMillis: 30000
+};
+
+const pool = new pg.Pool(config);
 
 
 
 
-client.connect((err) => {
+pool.connect((err) => {
 	if (err) {
 		console.error("connection error: ", err.stack);
 	} else {
@@ -40,4 +42,4 @@ client.connect((err) => {
 
 //export - no model, need to extract queries, helper function to generate the queries.
 
-module.exports = client;
+module.exports = pool;
