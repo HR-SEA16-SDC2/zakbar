@@ -13,9 +13,25 @@ const config = {
 
 const pool = new Pool(config);
 
+(async function() {
+	const client = await pool.connect();
+	await console.log(`${user} connected to postgres database: ${database}`);
+	client.release();
+})();
+
+
+pool.on("error", (err, client) => {
+	console.error("Error:", err);
+});
+
+module.exports = pool;
 
 
 
+
+
+/*
+-------------Error first pool connection-------------
 pool.connect((err) => {
 	if (err) {
 		console.error("connection error: ", err.stack);
@@ -24,26 +40,23 @@ pool.connect((err) => {
 	}
 });
 
-pool.on("error", (err, client) => {
-	console.error("Error:", err);
-});
-// async function connect() {
-//     const c = await client.connect(); // try to connect
-//     return c.client.serverVersion; // return server version
-// }
-// connect()
+-------------Async connection-------------
+async function connect() {
+    const c = await client.connect(); // try to connect
+    return c.client.serverVersion; // return server version
+}
+connect()
 
-//var connectionString = `postgres://${user}:${password}@localhost:5432/${database}`;
+-------------Postgres connection string template-------------
+var connectionString = `postgres://${user}:${password}@localhost:5432/${database}`;
 
-//
-// const db=pgp(connectionString)
-// async function testConnection() {
-//   const c = await db.connect();
-//   c.done();
-//   return c.client.serverVersion;
-// }
+-------------pgp package based connection-------------
+const db=pgp(connectionString)
+async function testConnection() {
+  const c = await db.connect();
+  c.done();
+  return c.client.serverVersion;
+}
 
-
-//export - no model, need to extract queries, helper function to generate the queries.
-
-module.exports = pool;
+export - no model, need to extract queries, helper function to generate the queries.
+*/
