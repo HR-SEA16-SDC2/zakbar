@@ -37,7 +37,6 @@ async function reportAnswer (req, res) {
 	}
 }
 
-
 module.exports = {
 	listAnswers,
 	helpfulAnswer,
