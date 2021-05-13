@@ -15,6 +15,20 @@ const answerModels = {
 		}
 	},
 
+
+	postAnswer: async (req, res) => {
+		const text =
+		"	INSERT INTO answers (question_id, body, answerer_name, answerer_email) VALUES ($1, $2, $3, $4)";
+		const values = [req.query.question_id, req.body, req.answerer_name, req.answerer_email];
+		try {
+			const client = await db.connect();
+			const res = await client.query(text, values);
+			return res.rows;
+		} catch (err) {
+			console.error(err);
+		}
+	},
+
 	updateHelpfulAnswer: async (req, res) => {
 		const text =
 		"UPDATE answer SET helpful = helpful + 1 WHERE answer_id = $1";

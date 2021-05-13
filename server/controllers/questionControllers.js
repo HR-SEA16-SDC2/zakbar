@@ -1,5 +1,6 @@
 const {
 	returnQuestions,
+	postQuestion,
 	updateHelpfulQuestion,
 	updateReportQuestion
 } = require("../../database/models/questionModels");
@@ -15,16 +16,16 @@ async function listQuestions (req, res) {
 	}
 }
 
-// async function listQuestions (req, res) {
-// 	try {
-// 		console.log("Hit questions endpoint");
-// 		const allQuestions = await returnQuestions(req, res);
-// 		res.status(200).send(allQuestions);
-// 	} catch (e) {
-// 		console.error(e);
-// 		res.status(500).send(e);
-// 	}
-// }
+async function addQuestion (req, res) {
+	try {
+		console.log("Hit questions endpoint");
+		await postQuestion(req, res);
+		res.sendStatus(200);
+	} catch (e) {
+		console.error(e);
+		res.status(500).send(e);
+	}
+}
 
 async function helpfulQuestion(req, res) {
 	try {
@@ -50,6 +51,7 @@ async function reportQuestion (req, res) {
 
 module.exports = {
 	listQuestions,
+	addQuestion,
 	helpfulQuestion,
 	reportQuestion
 };

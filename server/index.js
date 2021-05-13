@@ -2,14 +2,17 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3000;
 const morgan = require("morgan");
-const { listQuestions, helpfulQuestion, reportQuestion } = require("./controllers/questionControllers");
-const { listAnswers, helpfulAnswer, reportAnswer } = require("./controllers/answerControllers");
+const { listQuestions, addQuestion, helpfulQuestion, reportQuestion } = require("./controllers/questionControllers");
+const { listAnswers, addAnswer, helpfulAnswer, reportAnswer } = require("./controllers/answerControllers");
 
 app.use(morgan("tiny"));
 app.use(express.json());
 
 app.get("/qa/questions/", listQuestions);
 app.get("/qa/questions/:question_id/answers", listAnswers);
+
+app.post("/qa/questions", addQuestion);
+app.post("/qa/questions/:question_id/answers", addAnswer);
 
 app.put("/qa/questions/:question_id/helpful", helpfulQuestion);
 app.put("/qa/questions/:question_id/report", reportQuestion);

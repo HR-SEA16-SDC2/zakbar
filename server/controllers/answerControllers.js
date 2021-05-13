@@ -1,5 +1,6 @@
 const {
 	returnAnswers,
+	postAnswer,
 	updateHelpfulAnswer,
 	updateReportAnswer
 } = require("../../database/models/answerModels");
@@ -9,6 +10,17 @@ async function listAnswers (req, res) {
 		console.log("Hit answers endpoint");
 		const allAnswers = await returnAnswers(req, res);
 		res.status(200).send(allAnswers);
+	} catch (e) {
+		console.error(e);
+		res.status(500).send(e);
+	}
+}
+
+async function addAnswer (req, res) {
+	try {
+		console.log("Hit questions endpoint");
+		await postAnswer(req, res);
+		res.sendStatus(200);
 	} catch (e) {
 		console.error(e);
 		res.status(500).send(e);
@@ -39,6 +51,7 @@ async function reportAnswer (req, res) {
 
 module.exports = {
 	listAnswers,
+	addAnswer,
 	helpfulAnswer,
 	reportAnswer
 };
