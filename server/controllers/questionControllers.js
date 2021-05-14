@@ -9,6 +9,7 @@ async function listQuestions (req, res) {
 	try {
 		console.log("Hit questions endpoint");
 		const allQuestions = await returnQuestions(req, res);
+		console.log(allQuestions);
 		res.status(200).send(allQuestions);
 	} catch (e) {
 		console.error(e);

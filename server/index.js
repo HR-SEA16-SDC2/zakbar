@@ -25,9 +25,8 @@ app.listen(PORT, () => {
 });
 
 /*
-	missing 2 app.post routes: questions and answers
-	Need to continue developing answers pathways
+	Check all routes through postman
 	Decide on what to do with question/answer GET queries data model
+	index columns
 	k6 implementation
-
 */

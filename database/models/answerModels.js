@@ -15,7 +15,6 @@ const answerModels = {
 		}
 	},
 
-
 	postAnswer: async (req, res) => {
 		const text =
 		"	INSERT INTO answers (question_id, body, answerer_name, answerer_email) VALUES ($1, $2, $3, $4)";
